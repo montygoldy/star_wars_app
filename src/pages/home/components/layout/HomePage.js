@@ -9,9 +9,6 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Input from '@material-ui/core/Input';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,7 +23,7 @@ class HomePage extends Component {
 
   handleOnChange = (e) => {
     const { value } = e.target;
-    if (value !==  "0") {
+    if (value !==  0) {
       this.props.getPeopleInfoRequest(value);
     }
   }
@@ -71,18 +68,12 @@ class HomePage extends Component {
             <div className="select_wrapper">
               <h3> Please Select a Character </h3>
               <div>
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel htmlFor="outlined">
-                    Select Character
-                  </InputLabel>
+                <FormControl className={classes.formControl}>
                   <Select
                     value={currentMenu}
                     onChange={this.handleOnChange}
-                    input={<OutlinedInput labelWidth={200}name="star_character" id="outlined" />}
                   >
-                    <MenuItem value="0">
-                      <em>Select Character</em>
-                    </MenuItem>
+                    <MenuItem value={0}>Select Character</MenuItem>
                     <MenuItem value={1}>Luke Skywalker</MenuItem>
                     <MenuItem value={4}>Darth Vader</MenuItem>
                     <MenuItem value={5}>Leia Organa</MenuItem>
@@ -141,25 +132,20 @@ class HomePage extends Component {
                   <CircularProgress style={{ color: '#000' }} />
                 </div>
                 :
-                <div className="flexCenter">
+                <div className="flexCenter" style={{ overflow: 'hidden' }}>
                   <Table>
                     <TableBody style={{ backgroundColor: "#fff",  }}>
                       {
                         (peopleInfo.films && peopleInfo.films.length) ? 
-                          <TableRow>
-                            <TableCell component="th" scope="row" style={{ fontSize: 16, width: 100 }}>
-                              {lastSeenMovie.title}
-                            </TableCell>
-                            <TableCell align="right" style={{ fontSize: 16 }}>{lastSeenMovie.release_date.substring(0, 4)}</TableCell>
-                          </TableRow>
+                          <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: '#fff', paddingLeft: 10, paddingRight: 10, alignItems: 'center', justifyContent: 'space-between', height: 50 }}>
+                            <div style={{fontSize: 18}}>{lastSeenMovie.title}</div>
+                            <div style={{fontSize: 18}}>{lastSeenMovie.release_date.substring(0, 4)}</div>
+                          </div>
                           :
                         
-                          <TableRow key="1">
-                            <TableCell component="th" scope="row" style={{ fontSize: 16 }}>
-                              No Data
-                            </TableCell>
-                            <TableCell align="right" style={{ fontSize: 16 }}></TableCell>
-                          </TableRow>
+                        <div style={{ fontSize: 18, height: 50, backgroundColor: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          No Data
+                        </div>  
                       }
                     </TableBody>
                   </Table>
