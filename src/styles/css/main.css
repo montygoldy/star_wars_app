@@ -406,6 +406,18 @@ textarea:active {
       border-radius: 5px;
       min-width: 45rem;
       margin-bottom: 24px; }
+    .homepage__block .movie_wrapper {
+      flex: 2;
+      background: #F1A53C;
+      padding: 20px;
+      border: 20px solid rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      min-width: 45rem;
+      margin-bottom: 24px; }
+    .homepage__block .movieTable {
+      overflow-y: scroll;
+      width: 100%;
+      height: 265px; }
     .homepage__block h3 {
       margin-bottom: 1.5rem;
       text-align: center; }

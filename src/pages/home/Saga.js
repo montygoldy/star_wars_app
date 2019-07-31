@@ -5,10 +5,31 @@ import actions from "./Actions";
 import axios from "axios";
 
 const getPeopleInfoApi = (value) => {
+  // Api call to get people
   return axios.get(`https://swapi.co/api/people/${value}`)
-  .then((response) => {
+  .then(async (response) => {
+
+    // Api call to get selected people films data
+    if (response.data.films.length) {
+      const getFilmData = response.data.films
+        .map(async (url) => {
+          return await axios.get(url)
+          .then((res) => {
+            return res.data
+          }).catch(error => {
+            // handle error
+            return error;
+          })  
+        })
+
+      const results = await Promise.all(getFilmData)
+
+      // Updating original fils array with new data
+      response.data.films = results;
+    } 
+
     return response;
-  }).catch(function (error) {
+  }).catch((error) => {
     // handle error
     return error
   })
